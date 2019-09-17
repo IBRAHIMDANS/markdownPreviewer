@@ -20,6 +20,6 @@ const TabNavigator = createBottomTabNavigator({
     initialRouteName: 'Home',
 });
 
-const AppContainer = createAppContainer(TabNavigator);
+const AppContainer = createAppContainer(HomeStack);
 
 export default AppContainer;

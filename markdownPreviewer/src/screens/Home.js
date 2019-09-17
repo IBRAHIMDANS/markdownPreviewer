@@ -16,7 +16,11 @@ const Screen = ({navigation}) => {
     const [clipBoard, onClipBoard] = useState(insane(null));
     //autosize text
     useEffect(() => {
-        renderText(text)
+        if (text) {
+            onChangeText( text )
+        } else {
+            renderText(text)
+        }
     }, onChangeText);
     const renderText = texty => {
         return marked(texty);
