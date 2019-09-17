@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import RootNavigator from './src/navigator';
 import SafeAreaView from "react-native-safe-area-view";
+import * as Font from 'expo-font';
 
 export default function App() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
