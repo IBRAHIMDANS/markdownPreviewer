@@ -1,42 +1,55 @@
 import React, {useEffect, useState} from 'react';
-import {View, WebView} from 'react-native';
+import {Clipboard, Dimensions, View, WebView} from 'react-native';
 import {Button, Icon, Text, Textarea} from 'native-base';
 import {defaultText} from "../constants/defaultText";
 import styled from "styled-components";
 import marked from "marked";
 import HTML from 'react-native-render-html';
 import {ScrollView} from "react-navigation";
+import insane from 'insane'
+
 
 const Screen = ({navigation}) => {
-    const [text, onChangeText] = useState(defaultText);
+
+    const [text, onChangeText] = useState(insane(defaultText));
+    //clipboard
+    const [clipBoard, onClipBoard] = useState(insane(null));
     //autosize text
     useEffect(() => {
         renderText(text)
-    });
+    }, onChangeText);
     const renderText = texty => {
-        return marked(text);
+        return marked(texty);
     };
+    const writeToClipboard = async () => {
+        Clipboard.setString(text);
+        alert('Copied to clipboard');
+    };
+
     return (
         <>
-            <Buttons iconLeft>
+            <Flex>
+                <Buttons onPress={() => {
+                    writeToClipboard()
+                }} iconLeft>
                 <Icon name='copy'/>
                 <Text>Copy</Text>
             </Buttons>
+            </Flex>
             <View>
-                <Textarea
+                <Textareas
                     rowSpan={5}
                     bordered
                     placeholder={"MarkD0wn Preview"}
                     value={text}
-                    style={{height: 40}}
                     onChangeText={onChangeText}
                 />
             </View>
             <ScrollView>
-                <View>
-                    <WebView
-                        source={{html: '<h1>Hello world</h1>'}}
-                    />
+                <View style={{flexDirection: "collun"}}>
+                    {/*<WebViews*/}
+                    {/*    source={{html: renderText(text)}}*/}
+                    {/*/>*/}
                     <HTML html={renderText(text) }/>
                 </View>
             </ScrollView>
@@ -48,16 +61,24 @@ Screen.navigationOptions = {
     title: 'MarkD0wn Previewer'
 };
 
+const Textareas = styled(Textarea)`
+  display: flex;
+width:  ${Dimensions.get('window').width};
+height:  ${Dimensions.get('window').height / 3};
+border: 1px solid rgb(0,0,0);
+  
+`
+const Flex = styled(View)`
+`
 const Buttons = styled(Button)`
   display: flex;
-  width: 100px;
-  align-self: flex-end;
+  align-self: center;
   margin: 1%;
 `
 const WebViews = styled(WebView)`
-  flex: 1;
-  width: 300px;
-  height: 30px;
+margin: 1%;
+width: ${Dimensions.get('window').width}; 
+height: ${Dimensions.get('window').height / 2};
 `
 
 export default Screen;
