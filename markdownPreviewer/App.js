@@ -15,9 +15,9 @@ export default function App() {
     ])
   }
   return (
-      <View style={{flex: 1, backgroundColor: '#fff'}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
         <RootNavigator/>
-      </View>
+      </SafeAreaView>
   );
 }
 

@@ -2,17 +2,19 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "installer": "yarn",
-    "build": " yarn installer && yarn start",
     "start": "expo start",
+    "build": "yarn installer && yarn start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.6.1",
     "autosize": "^4.0.2",
     "expo": "^34.0.1",
     "expo-font": "~6.0.1",
+    "insane": "^2.6.2",
     "marked": "^0.7.0",
     "native-base": "^2.13.8",
     "react": "16.8.3",
@@ -27,6 +29,7 @@
     "react-navigation": "^4.0.5",
     "react-navigation-stack": "^1.7.3",
     "react-navigation-tabs": "^2.5.2",
+    "sanitize-html": "^1.20.1",
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
