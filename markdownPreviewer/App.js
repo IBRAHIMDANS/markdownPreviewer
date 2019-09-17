@@ -1,19 +1,23 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+import RootNavigator from './src/navigator';
+import SafeAreaView from "react-native-safe-area-view";
 
 export default function App() {
+  const [isLoadingComplete, setLoadingComplete] = useState(false);
+
+  async function loadResourcesAsync() {
+    await Promise.all([
+      Asset.loadAsync([
+        require('./assets/icon.png'),
+        require('./assets/splash.png'),
+      ]),
+    ])
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+      <View style={{flex: 1, backgroundColor: '#fff'}}>
+        <RootNavigator/>
+      </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
