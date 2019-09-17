@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Clipboard, Dimensions, View, WebView} from 'react-native';
+import {AsyncStorage, Clipboard, Dimensions, View, WebView} from 'react-native';
 import {Button, Icon, Text, Textarea} from 'native-base';
 import {defaultText} from "../constants/defaultText";
 import styled from "styled-components";
@@ -8,20 +8,33 @@ import HTML from 'react-native-render-html';
 import {ScrollView} from "react-navigation";
 import insane from 'insane'
 
-
 const Screen = ({navigation}) => {
-
-    const [text, onChangeText] = useState(insane(defaultText));
+    // defaultText
+    const [text, setText] = useState(insane(''));
     //clipboard
     const [clipBoard, onClipBoard] = useState(insane(null));
-    //autosize text
-    useEffect(() => {
-        if (text) {
-            onChangeText( text )
-        } else {
-            renderText(text)
+    // Storage Text in Async Storage for save
+
+    const _storeData = async () => {
+        try {
+            console.log(await AsyncStorage.getItem('markD0wn'))
+            if (await AsyncStorage.getItem('markD0wn') && text.length === 0 ) {
+                await AsyncStorage.setItem('markD0wn', text);
+            }else {
+                setText(defaultText);
+            }
+        } catch (error) {
+            console.log(error.message)
         }
-    }, onChangeText);
+    };
+
+
+    useEffect(() => {
+            ''
+            _storeData();
+        }, []
+    )
+
     const renderText = texty => {
         return marked(texty);
     };
@@ -46,7 +59,7 @@ const Screen = ({navigation}) => {
                     bordered
                     placeholder={"MarkD0wn Preview"}
                     value={text}
-                    onChangeText={onChangeText}
+                    onChangeText={setText}
                 />
             </View>
             <ScrollView>
