@@ -16,7 +16,7 @@
     "expo-font": "~6.0.1",
     "insane": "^2.6.2",
     "marked": "^0.7.0",
-    "native-base": "^2.13.8",
+    "native-base": "2.15.2",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz",
