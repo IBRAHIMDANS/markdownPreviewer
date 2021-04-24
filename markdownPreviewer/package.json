@@ -10,7 +10,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@react-native-community/async-storage": "^1.6.1",
+    "@react-native-community/async-storage": "1.12.1",
     "autosize": "^4.0.2",
     "expo": "^34.0.1",
     "expo-font": "~6.0.1",
